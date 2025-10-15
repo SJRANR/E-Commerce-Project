@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makeup Store</title>
+  <link rel="stylesheet" href="text.css">
+  <script src="text.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <header>
+    <h1> TharaBi Makeup Fashion</h1>
+    <div class="nav-buttons">
+      <button onclick="openFavPage()">❤️ Wishlist (<span id="favCount">0</span>)</button>
+      <button onclick="openCartPage()">🛒 Cart (<span id="cartCount">0</span>)</button>
+    </div>
+  </header>
+
+  <section class="products" id="productList">
+    <!-- Products will be added here dynamically -->
+  </section>
+
+  <!-- Cart Page -->
+  <div class="cart-page" id="cartPage">
+    <h2>Your Cart 🛍️</h2>
+    <ul id="cartItems"></ul>
+    <p id="totalPrice">Total: ₹0</p>
+    <button class="close" onclick="closeCartPage()">Close</button>
+  </div>
+
+  <!-- Wishlist Page -->
+  <div class="fav-page" id="favPage">
+    <h2>Your Wishlist ❤️</h2>
+    <ul id="favItems"></ul>
+    <button class="close" onclick="closeFavPage()">Close</button>
+  </div>
+
+</body>
+</html>
