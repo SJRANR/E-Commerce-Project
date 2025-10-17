@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Card Slider</title>
+    <link rel="stylesheet" href="homepage.css">
+
+</head>
+
+<body>
+    <nav>
+        <div class="logo">TharaBi</div>
+        <form class="searchbar">
+            <input type="search" placeholder="Search the product....🔍︎" list="values">
+            <datalist id="values">
+        <option value="">saree</option>
+        <option value="">short kurti</option>
+        <option value="">tshirt</option>
+        <option value="">watch</option>
+        <option value="">kurti</option>
+        <option value="">shoes</option>
+        <option value="">earring</option>
+        <option value="">tops</option>
+        <option value="">blouse</option>
+        <option value="">jeans</option>
+        <option value="">slipper</option>
+        <option value="">jewelleries</option>
+        <option value="">dress</option>
+      </datalist>
+        </form>
+        <ul class="product">
+            <li><a href="">Home 🏠︎</a></li>
+            <li><a href="">Product 🛍️</a></li>
+            <li><a href="cart.html">cart 🛒 </a></li>
+            <li id="fav"><a href="wishlist.html">❤</a></li>
+            <li><a href="">About Us</a></li>
+        </ul>
+        <div class="btns">
+            <a href="loginpage.html"><button class="btn" >Login 👤</button></a>
+        </div>
+    </nav>
+    <div class="section-top">
+        <div class="content">
+            <h1>TharaBi Womens fashion <br><span>Online shopping</span></h1><br>
+            <a href="">Shop Now</a>
+
+        </div>
+    </div>
+    <h3 id="Companyproducts">Our Company Products</h3>
+    <div class="slider">
+        <div class="slider-container">
+            <div class="slide active">
+                <img src="images.png/productjwellary.jpg" alt="New York">
+                <div class="content">
+                    <h2>jewellery</h2>
+                    <p>$250-$50000</p>
+                    <p>gold,silver, covering </p>
+                    <button onclick="window.location.href='jewellry.html'">View More</button><br>
+                    <p class="star">★★★★☆</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images.png/makeupproduct.jpg" alt="Dubai">
+                <div class="content">
+                    <h2>Makeup Products</h2>
+                    <p>$50-$2000</p>
+                    <p>skin,haircare product</p>
+                    <button>View More</button><br>
+                    <p class="star">★★★★☆</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images.png/clothprduct.jpg" alt="womens dress">
+                <div class="content">
+                    <h2>Womens Dress</h2>
+                    <p>$150-$10000</p>
+                    <p>wedding,formal Dress</p>
+                    <button onclick="window.location.href='home.html'">View More</button><br>
+                    <p class="star">★★★★☆</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images.png/girlsproduct.jpg" alt="kidsware">
+                <div class="content">
+                    <h2>Kids product</h2>
+                    <p>$500-$2000</p>
+                    <p>newbone,kids dress</p>
+                    <button>View More</button><br>
+                    <p class="star">★★★★☆</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="images.png/footwareproducts.jpg" alt="footware">
+                <div class="content">
+                    <h2>womens footware</h2>
+                    <p>$300-$4000</p>
+                    <p>size 1-10 all size available</p>
+                    <button>View More</button><br>
+                    <p class="star">★★★★☆</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="prev">&#10094;</button>
+            <button id="next">&#10095;</button>
+        </div>
+    </div>
+    <script src="homepage.js"></script>
+
+
+
+
+
+</body>
+
+</html>
