@@ -1,0 +1,152 @@
+:root{
+  --card-w: 220px;
+  --card-h: 340px;
+  --gap: 16px;
+  --bg: #0b0f17;
+  --accent: #39c3ff;
+  --duration: 520ms;
+  --easing: cubic-bezier(.22,.61,.36,1);
+  --auto-delay: 2200ms;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(1200px 800px at 80% -200px, #132033 0%, transparent 70%) var(--bg);
+  color: #e8eef7;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.slider {
+  width: min(100vw - 40px, 1200px);
+  perspective: 1200px;
+  padding-block: 24px 8px;
+  position: relative;
+  user-select: none;
+}
+
+.viewport {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: var(--gap);
+  padding-inline: 12px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform var(--duration) var(--easing);
+}
+
+.card {
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  flex: 0 0 var(--card-w);
+  border-radius: 16px;
+  overflow: hidden;
+  transform-origin: 50% 50%;
+  background: #1a2333;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.35),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+  transition: transform var(--duration) var(--easing), filter var(--duration) var(--easing), box-shadow var(--duration) var(--easing);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.05) saturate(1.05);
+}
+
+/* Curved “fan” look: based on distance from center index */
+.slider.curve .card {
+  --tilt: 0deg;
+  transform: rotateY(var(--tilt)) translateZ(0);
+}
+
+/* Focus effect on active slide */
+.card.is-active {
+  filter: brightness(1.05);
+  box-shadow:
+    0 18px 36px rgba(0,0,0,.5),
+    inset 0 0 0 1px rgba(255,255,255,.14);
+}
+
+/* Dots */
+.dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 14px 0 2px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #2b3b54;
+  border: 1px solid rgba(255,255,255,.12);
+  transition: transform 220ms ease, background 220ms ease, width 220ms ease;
+  cursor: pointer;
+}
+.dot.is-active {
+  background: var(--accent);
+  width: 22px;
+  transform: translateZ(0);
+}
+
+/* Navigation (optional) */
+.nav {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.btn {
+  pointer-events: auto;
+  border: none;
+  background: rgba(20,28,44,.5);
+  color: #d7e6ff;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: transform 160ms ease, background 160ms ease;
+}
+.btn:hover { background: rgba(20,28,44,.72); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+/* Pause label */
+.badge {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 12px;
+  color: #a9bed8;
+  opacity: .7;
+  padding: 4px 8px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  background: rgba(12,18,30,.5);
+  display: none;
+}
+.slider.is-paused .badge { display: inline-block; }
+
+/* Responsiveness */
+@media (max-width: 900px){
+  :root{ --card-w: 180px; --card-h: 280px; }
+}
+@media (max-width: 640px){
+  :root{ --card-w: 62vw; --card-h: 56vw; }
+}

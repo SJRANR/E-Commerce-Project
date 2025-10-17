@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Glamveda Face Wash</title>
+  <link rel="stylesheet" href="cart.css" />
+</head>
+<body>
+  <div class="container fade-in">
+    <!-- Product Image Section -->
+    <div class="product-image slide-in-left">
+      <img id="mainImage" src="https://i.imgur.com/UOz0ZoL.png" alt="Face Wash Pack" />
+      
+      <!-- Similar Products -->
+      <div class="similar-products">
+        <h3>3 Similar Products</h3>
+        <div class="thumbnails">
+          <img src="images.png/7.png.png" alt="Similar 1" onclick="changeImage(this)" />
+          <img src="items.png/lipstik 1.jpg" alt="Similar 2" onclick="changeImage(this)" />
+          <img src="items.png/lipstik 1.jpg" alt="Similar 3" onclick="changeImage(this)" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Details Section -->
+    <div class="product-details slide-in-right">
+      <h1>Glamveda Rice & Ceramide Korean Glass Skin Face Wash</h1>
+      <p class="tagline">Brightening & Clarifying | Dry Skin | Pack of 3 (100ml each)</p>
+
+      <div class="price">
+        <span class="current-price">₹254</span>
+        <span class="old-price">₹750</span>
+        <span class="discount pulse">66% OFF</span>
+      </div>
+
+      <div class="rating">⭐ 4.3 (7629 Ratings, 5242 Reviews)</div>
+
+      <div class="buttons">
+        <button onclick="addToCart()">🛒 Add to Cart</button>
+        <button class="buy" onclick="buyNow()">🛍️ Buy Now</button>
+      </div>
+
+      <h3>Product Highlights</h3>
+      <ul>
+        <li>No Parabens, SLS Free</li>
+        <li>Dry Skin Types</li>
+        <li>Strengthens skin barrier</li>
+        <li>Gives smooth, supple, glass-like skin</li>
+      </ul>
+
+      <p class="origin">🌍 Made in India | Sold by: GLAMVEDA (4.1★ Seller)</p>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+</body>
+</html>
