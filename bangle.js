@@ -271,6 +271,38 @@ document.addEventListener('DOMContentLoaded', () => {
             event.stopPropagation();
         });
     });
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    document.querySelectorAll('.like-button').forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+
+            const productItem = button.closest('.product-item');
+            const productId = productItem.getAttribute('data-product-id');
+            const productImage = productItem.querySelector('img').getAttribute('src');
+            const productName = productItem.querySelector('h3').textContent;
+            const productPrice = productItem.querySelector('.price').textContent.trim();
+
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+            const existingItem = wishlist.find(item => item.id === productId);
+
+            if (!existingItem) {
+                wishlist.push({
+                    id: productId,
+                    name: productName,
+                    price: productPrice,
+                    image: productImage
+                });
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                button.classList.add('liked');
+            } else {
+                wishlist = wishlist.filter(i => i.id !== productId);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                button.classList.remove('liked');
+            }
+        });
+    });
+
 
     closeBtn.onclick = function() {
         modal.style.display = "none";
