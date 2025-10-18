@@ -98,6 +98,27 @@
             transform: scale(1.1);
             background-color: #0056b3;
         }
+        
+        .clear-all-btn {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            padding: 8px 15px;
+            background-color: #ff66a3;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s;
+            z-index: 5;
+            /* Ensure it's above other elements if necessary */
+        }
+        
+        .clear-all-btn:hover {
+            background-color: #d8528f;
+        }
     </style>
 </head>
 
@@ -105,7 +126,7 @@
 
     <h1>❤️ My Favourite Items</h1>
     <div id="wishlist-container" class="wishlist-container"></div>
-
+    <button class="clear-all-btn" onclick="clearWishlist()">Clear All</button>
     <!-- Floating Home Emoji Button -->
     <span class="home-emoji" onclick="window.location.href='homepage.html'">🏠</span>
 
@@ -122,29 +143,40 @@
             }
 
             wishlist.forEach(item => {
-                // Prevent showing undefined items
-                if (!item.image || !item.name || !item.price) return;
+                // ensure required properties exist (id too)
+                if (!item.id || !item.image || !item.name || !item.price) return;
 
                 const div = document.createElement('div');
                 div.classList.add('wishlist-item');
                 div.innerHTML = `
-                    <button class="remove-btn" onclick="removeItem('${item.id}')">❌</button>
-                    <img src="${item.image}" alt="${item.name}">
-                    <h3>${item.name}</h3>
-                    <p>${item.price}</p>
-                `;
+                <button class="remove-btn" onclick="removeItem('${item.id}')">❌</button>
+                <img src="${item.image}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p>${item.price}</p>
+            `;
                 wishlistContainer.appendChild(div);
             });
         }
 
-        function removeItem(id) {
-            // This line is crucial for removing the item from the persistent storage
-            wishlist = wishlist.filter(i => i.id !== Number(id));
-            localStorage.setItem('wishlist', JSON.stringify(wishlist));
-
+        function clearWishlist() {
+            if (confirm("Are you sure you want to clear your entire wishlist?")) {
+                wishlist = [];
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                renderWishlist();
+            }
         }
+
+        function removeItem(id) {
+            const idStr = String(id);
+            wishlist = wishlist.filter(i => String(i.id) !== idStr);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            renderWishlist();
+        }
+
+
         renderWishlist();
     </script>
+
 
 </body>
 
