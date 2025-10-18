@@ -138,11 +138,11 @@
         }
 
         function removeItem(id) {
-            wishlist = wishlist.filter(i => i.id !== id);
+            // This line is crucial for removing the item from the persistent storage
+            wishlist = wishlist.filter(i => i.id !== Number(id));
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
-            renderWishlist();
-        }
 
+        }
         renderWishlist();
     </script>
 

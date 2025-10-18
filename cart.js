@@ -85,7 +85,7 @@ const addCartToHTML = () => {
 
             let positionProduct = listProducts.findIndex((value) => value.id == cart.product_id);
             let info = listProducts[positionProduct];
-            
+
             newCart.innerHTML = `
                 <div class="image">
                     <img src="${info.image}" alt="">
@@ -125,7 +125,7 @@ const changeQuantity = (product_id, type) => {
             case 'plus':
                 carts[positionItemInCart].quantity = carts[positionItemInCart].quantity + 1;
                 break;
-        
+
             default: // minus
                 let valueChange = carts[positionItemInCart].quantity - 1;
                 if (valueChange > 0) {

@@ -1,0 +1,119 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fff5f8;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 30px;
+}
+
+.product {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-8px);
+    border: 2px solid #ff66a3;
+    box-shadow: 0 8px 20px rgba(255, 102, 163, 0.3);
+}
+
+.product img {
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.product h3 {
+    margin: 10px 0 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.product p {
+    margin: 0;
+    color: #ff4081;
+    font-weight: bold;
+}
+
+.heart {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    color: #bbb;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.heart.active {
+    color: red;
+    animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.7);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+button.add-cart {
+    background: #ff66a3;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.add-cart:hover {
+    background: #ff4081;
+}
+
+.home-emoji {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    font-size: 30px;
+    background-color: #ff9a9e;
+    color: white;
+    border-radius: 50%;
+    padding: 10px 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background-color 0.2s;
+    z-index: 1000;
+}
+
+.home-emoji:hover {
+    transform: scale(1.1);
+    background-color: #0056b3;
+}
