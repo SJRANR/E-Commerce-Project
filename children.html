@@ -2,125 +2,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tharabi E-commerce Shop</title>
-    <link rel="stylesheet" href="home.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="children.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
+
     <header>
-        <div class="logo" id="home-link">Tharabi</div>
-
-        <div class="controls">
-            <div class="search-wrap" title="Search products">
-                <i class="ri-search-line" style="margin-right:8px;color:var(--muted-text)"></i>
-                <input id="search-input" placeholder="Search products, e.g., saree" aria-label="Search products" />
-            </div>
-
-            <select id="category-filter" class="filter-select" title="Filter by category">
-                <option value="all">All categories</option>
-                <option value="dress">Dresses</option>
-                <option value="saree">Sarees</option>
-                <option value="lehenga">Lehenga</option>
-                <option value="girls">Girls</option>
-            </select>
-
-
-            <div id="cart-icon" class="cart-icon" aria-label="Open cart" title="Open cart">
-                <i class="ri-shopping-bag-line"></i>
-                <span id="cart-counter" class="cart-counter" style="display:none;">0</span>
-            </div>
-            <span class="home-emoji" onclick="window.location.href='homepage.html'">🏠</span>
-
+        <div class="logo">
+            <a id="home-link" href="#">Tharabi</a>
         </div>
-
+        <div class="controls">
+            <div class="search-wrap">
+                <input type="search" id="search-input" placeholder="Search products, e.g., saree" class="search-input" aria-label="Search">
+                <i class="fa fa-search search-icon"></i>
+            </div>
+            <div class="category-filter-wrap">
+                <select id="category-filter" class="filter-select" title="Filter by category">
+                    <option value="all">All categories</option>
+                    <option value="dresses">Dresses</option>
+                    <option value="saree">Sarees</option>
+                    <option value="lehenga">Lehenga</option>
+                    <option value="girls">Girls</option>
+                </select>
+            </div>
+            <div class="cart-icon-area">
+                <a id="open-cart" href="#" aria-label="Open cart">
+                    <i class="fa fa-shopping-bag cart-icon"></i>
+                    <span id="cart-item-count" class="cart-item-count">0</span>
+                </a>
+            </div>
+            <h1 onclick="window.location.href='homepage.html'" class="home">🏠</h1>
+        </div>
     </header>
 
-    <main>
-        <section id="shop-view-wrapper">
-            <h1 style="color:var(--primary);margin-bottom:20px;text-align:center;">LATEST ETHNIC WEAR COLLECTION</h1>
-            <div class="products-grid" id="products-grid">
-            </div>
-        </section>
-
-
-        <section id="product-detail-view" aria-hidden="true" class="detail-container">
-            <button id="detail-back-btn" class="back-btn" title="Back to products" style="display:none;"><i class="ri-arrow-left-line"></i> Back</button>
-
-            <div class="detail-wrap">
-                <div class="detail-gallery">
-                    <div class="detail-main-img">
-                        <img id="detail-main-img" src="#" alt="Product Detail Image">
-                    </div>
-                </div>
-
-                <div class="detail-info">
-                    <h1 id="detail-title">Product Title</h1>
-
-                    <div class="product-rating" id="detail-rating">
-                    </div>
-
-                    <div class="product-price-info">
-                        <span id="detail-current-price" class="current-price price">₹0</span>
-                        <span id="detail-old-price" class="old-price" style="display:none;"></span>
-                        <span id="detail-discount" class="discount-badge" style="display:none;"></span>
-                    </div>
-
-                    <div class="product-description-wrap">
-                        <h3>Description</h3>
-                        <p id="detail-desc">Product description will be displayed here.</p>
-                    </div>
-
-                    <div class="product-ratings-reviews-detail">
-                        <h3 style="margin-bottom:15px; border-top: 1px solid var(--card-border); padding-top: 20px;">Customer Ratings & Reviews</h3>
-
-                        <div class="ratings-summary-detail">
-                            <div class="overall-rating-detail">
-                                <div class="rating-value-detail" id="overallAvgRating"></div>
-                                <div class="rating-total-count" id="totalRatingReviews"></div>
-                            </div>
-                            <div class="rating-breakdown-detail" id="ratingBreakdownBars">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-options-group">
-                        <div><strong>Size</strong></div>
-                        <div class="options" id="detail-sizes">
-                        </div>
-                    </div>
-
-                    <div class="detail-action-buttons">
-                        <button id="detail-add-to-cart-btn" class="btn btn-outline"><i class="ri-shopping-cart-line"></i> Add to Cart</button>
-                        <button id="detail-buy-now-btn" class="btn btn-primary">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main class="product-grid-container">
+        <h1>Shop Products</h1>
+        <div class="product-grid" id="product-grid">
+        </div>
     </main>
 
-    <aside class="cart" id="cart-panel" aria-hidden="true">
-        <div class="cart-head">
-            <div style="font-weight:700;font-size:1.05rem">Your Cart</div>
-            <div style="display:flex;gap:8px;align-items:center">
-                <button id="cart-clear" class="btn btn-outline" title="Clear cart">Clear</button>
-                <button id="cart-close" class="btn" title="Close cart"><i class="ri-close-line"></i></button>
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <p class="back-to-shop-text" id="back-to-shop-btn">← Back to shop</p>
+            <span class="close-btn">&times;</span>
+            <div id="modal-product-details">
             </div>
         </div>
+    </div>
 
-        <div class="cart-items" id="cart-items">
-            <div class="cart-empty">Your cart is empty.</div>
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button id="clear-cart-btn">Clear</button>
+            <button id="cart-close-btn" class="cart-close-btn">&times;</button>
         </div>
-
+        <div id="cart-items" class="cart-items">
+        </div>
         <div class="cart-footer">
-            <div class="cart-total">
-                <div>Total</div>
-                <div id="cart-total">₹0</div>
-            </div>
-            <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+            <p>Total: ₹<span id="cart-total">0</span></p>
+            <button id="checkout-btn">Checkout</button>
         </div>
-    </aside>
+    </div>
 
     <script src="children.js"></script>
 </body>

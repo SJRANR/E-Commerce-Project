@@ -1,161 +1,72 @@
-let iconCart = document.querySelector('.icon-cart');
-let closeCart = document.querySelector('.close');
-let body = document.querySelector('body');
-let listProductHTML = document.querySelector('.listproduct');
-let listCartHTML = document.querySelector('.listcart');
-let iconCartSpan = document.querySelector('.icon-cart span');
+document.addEventListener('DOMContentLoaded', () => {
+    const cartContainer = document.getElementById('cart-items');
+    const totalPriceEl = document.getElementById('total-price');
 
-let listProducts = [];
-let carts = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Toggle cart visibility
-iconCart.addEventListener('click', () => {
-    body.classList.toggle('showcart');
-});
+    function renderCart() {
+        cartContainer.innerHTML = '';
+        let totalPrice = 0;
 
-closeCart.addEventListener('click', () => {
-    body.classList.toggle('showcart');
-});
+        cart.forEach((item, index) => {
+            const priceNum = parseInt(item.price.replace(/[₹,]/g, ''));
+            totalPrice += priceNum * item.quantity;
 
-// Function to add product data to HTML
-const addDataToHTML = () => {
-    // Clear existing product list
-    listProductHTML.innerHTML = '';
-
-    if (listProducts.length > 0) {
-        listProducts.forEach(product => {
-            let newProduct = document.createElement('div');
-            newProduct.classList.add('item');
-            newProduct.dataset.id = product.id;
-            newProduct.innerHTML = `
-                <img src="${product.image}" alt="">
-                <h2>${product.name}</h2>
-                <div class="price">$${product.price}</div>
-                <button class="addcart">Add To Cart</button>
-            `;
-            listProductHTML.appendChild(newProduct);
-        });
-    }
-}
-
-// Event delegation for adding items to cart
-listProductHTML.addEventListener('click', (event) => {
-    let positionClick = event.target;
-    if (positionClick.classList.contains('addcart')) {
-        let product_id = positionClick.parentElement.dataset.id;
-        addToCart(product_id);
-    }
-});
-
-// Function to add a product to the cart
-const addToCart = (product_id) => {
-    let positionThisProductInCart = carts.findIndex((value) => value.product_id == product_id);
-    if (carts.length <= 0) {
-        carts = [{
-            product_id: product_id,
-            quantity: 1
-        }];
-    } else if (positionThisProductInCart < 0) {
-        carts.push({
-            product_id: product_id,
-            quantity: 1
-        });
-    } else {
-        carts[positionThisProductInCart].quantity = carts[positionThisProductInCart].quantity + 1;
-    }
-    addCartToHTML();
-    addCartToMemory();
-}
-
-// Store cart data in localStorage
-const addCartToMemory = () => {
-    localStorage.setItem('cart', JSON.stringify(carts));
-}
-
-// Function to render the cart
-const addCartToHTML = () => {
-    listCartHTML.innerHTML = '';
-    let totalQuantity = 0;
-    if (carts.length > 0) {
-        carts.forEach(cart => {
-            totalQuantity = totalQuantity + cart.quantity;
-            let newCart = document.createElement('div');
-            newCart.classList.add('item');
-            newCart.dataset.id = cart.product_id;
-
-            let positionProduct = listProducts.findIndex((value) => value.id == cart.product_id);
-            let info = listProducts[positionProduct];
-
-            newCart.innerHTML = `
-                <div class="image">
-                    <img src="${info.image}" alt="">
-                </div>
-                <div class="name">${info.name}</div>
-                <div class="totalprice">$${(info.price * cart.quantity).toFixed(2)}</div>
-                <div class="quantity">
-                    <span class="minus"><</span>
-                    <span>${cart.quantity}</span>
-                    <span class="plus">></span>
+            const div = document.createElement('div');
+            div.classList.add('cart-item');
+            div.innerHTML = `
+                <img src="${item.image}" alt="${item.title}" width="100">
+                <div class="cart-item-info">
+                    <h3>${item.title}</h3>
+                    <p>Price: ${item.price}</p>
+                    <div class="quantity-control">
+                        <button class="decrease-btn" data-index="${index}">-</button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="increase-btn" data-index="${index}">+</button>
+                    </div>
+                    <button class="remove-btn" data-index="${index}">Remove</button>
                 </div>
             `;
-            listCartHTML.appendChild(newCart);
-        })
-    }
-    iconCartSpan.innerText = totalQuantity;
-}
+            cartContainer.appendChild(div);
+        });
 
-// Event delegation for changing quantity in the cart
-listCartHTML.addEventListener('click', (event) => {
-    let positionClick = event.target;
-    if (positionClick.classList.contains('minus') || positionClick.classList.contains('plus')) {
-        let product_id = positionClick.parentElement.parentElement.dataset.id;
-        let type = 'minus';
-        if (positionClick.classList.contains('plus')) {
-            type = 'plus';
-        }
-        changeQuantity(product_id, type);
-    }
-})
+        totalPriceEl.textContent = `Total: ₹ ${totalPrice.toLocaleString()}`;
 
-// Function to change item quantity
-const changeQuantity = (product_id, type) => {
-    let positionItemInCart = carts.findIndex((value) => value.product_id == product_id);
-    if (positionItemInCart >= 0) {
-        switch (type) {
-            case 'plus':
-                carts[positionItemInCart].quantity = carts[positionItemInCart].quantity + 1;
-                break;
+        // Increase quantity
+        document.querySelectorAll('.increase-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const index = e.target.getAttribute('data-index');
+                cart[index].quantity++;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+            });
+        });
 
-            default: // minus
-                let valueChange = carts[positionItemInCart].quantity - 1;
-                if (valueChange > 0) {
-                    carts[positionItemInCart].quantity = valueChange;
+        // Decrease quantity
+        document.querySelectorAll('.decrease-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const index = e.target.getAttribute('data-index');
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
                 } else {
-                    // Remove the item if quantity reaches zero
-                    carts.splice(positionItemInCart, 1);
+                    // Remove item if quantity is 1
+                    cart.splice(index, 1);
                 }
-                break;
-        }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+            });
+        });
+
+        // Remove item
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const index = e.target.getAttribute('data-index');
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCart();
+            });
+        });
     }
-    addCartToMemory();
-    addCartToHTML();
-}
 
-// Initialize the application
-const initApp = () => {
-    // Get data from JSON
-    fetch('products.json')
-        .then(response => response.json())
-        .then(data => {
-            listProducts = data;
-            addDataToHTML();
-
-            // Get cart from memory if it exists
-            if (localStorage.getItem('cart')) {
-                carts = JSON.parse(localStorage.getItem('cart'));
-                addCartToHTML();
-            }
-        })
-}
-
-initApp();
+    renderCart();
+});

@@ -1,5 +1,3 @@
-// necklace_scripts.js
-
 const productData = {
     "neck3": {
         title: "Guttapusalu Necklace",
@@ -236,8 +234,7 @@ const productData = {
         ratingBreakdown: { "Excellent": 80, "Very Good": 20, "Good": 5, "Average": 5, "Poor": 0 }
     }
 };
-
-// --- Helper Functions (Globally accessible for the modal) ---
+// --- Helper Functions (Globally available for modal buttons) ---
 
 function getStarHTML(rating) {
     let html = '';

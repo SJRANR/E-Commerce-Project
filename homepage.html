@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <script src="cart-utils.js"></script>
     <nav>
         <div class="logo">TharaBi</div>
         <form class="searchbar">
@@ -35,7 +36,11 @@
         <ul class="product">
             <li><a href="">Home 🏠︎</a></li>
             <li><a href="">Product 🛍️</a></li>
-            <li><a href="cart.html">cart 🛒 </a></li>
+            <li>
+                <a href="cart.html" class="cart-icon">cart 🛒
+            <span id="cart-item-count" class="cart-count">0</span>
+             </a>
+            </li>
             <li id="fav"><a href="wishlist.html">❤</a></li>
             <li><a href="">About Us</a></li>
         </ul>

@@ -147,3 +147,22 @@ document.addEventListener('click', (e) => {
         resumeSlider();
     }
 });
+document.querySelectorAll('.buy-btn').forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        const card = btn.closest('.featured-product');
+        const title = card.querySelector('h3').textContent;
+        const price = parseInt(card.querySelector('.price').textContent.replace('₹', ''));
+        addToCart('featured' + index, title, price);
+    });
+});
+
+function updateCartCount() {
+    const countEl = document.getElementById('cart-item-count');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (countEl) countEl.textContent = totalQty;
+}
+
+// Call it after adding product
+addProductToCart(cartItem);
+updateCartCount();

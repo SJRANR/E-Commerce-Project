@@ -4,61 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Shopping Cart</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="all.css">
+    <title>Cart - TharaBi</title>
+    <link rel="stylesheet" href="cart.css">
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <div class="header-left">Luxury COLLECTION</div>
-            <div class="header-right"><a href="all.html">Continue Shopping</a></div>
-        </header>
-
-        <h1 class="page-title">Your Shopping Cart</h1>
-
-        <div class="cart-page-container">
-            <section class="cart-items-list-wrapper">
-                <h2>Items in your Cart (<span id="cart-item-count">0</span>)</h2>
-                <div id="cart-items-page">
-                    <div class="empty-cart-message" id="cart-empty-state">
-                        Your cart is empty. <a href="all.html" style="color: var(--primary, #008080);">Continue Shopping</a>
-                    </div>
-                </div>
-            </section>
-
-            <aside class="cart-summary">
-                <h2>Order Summary</h2>
-                <div class="summary-details">
-                    <div class="summary-row">
-                        <span>Subtotal</span>
-                        <span id="summary-subtotal">₹0</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Shipping Estimate</span>
-                        <span>Free</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Discount</span>
-                        <span>₹0</span>
-                    </div>
-                    <div class="summary-total">
-                        <span>Order Total</span>
-                        <span id="summary-total">₹0</span>
-                    </div>
-                </div>
-                <button class="checkout-btn-page">Proceed to Checkout</button>
-                <button class="checkout-btn-page clear-btn" onclick="clearCart()">Clear Cart</button>
-            </aside>
-        </div>
-    </div>
-
+    <h1>🛒 Shopping Cart Items</h1>
+    <br>
+    <hr>
+    <div id="cart-items"></div>
+    <br>
+    <h2 id="total-price"></h2>
+    <span class="home-emoji" onclick="window.location.href='homepage.html'">🏠</span>
+    <script src="cart-utils.js"></script>
     <script src="cart.js"></script>
-    <script>
-        // Start cart page rendering when the page loads
-        document.addEventListener('DOMContentLoaded', renderCartPage);
-    </script>
 </body>
 
 </html>
